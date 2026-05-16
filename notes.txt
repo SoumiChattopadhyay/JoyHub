@@ -1,3 +1,0 @@
-npm i razorpay
-https://razorpay.com/docs/payments/server-integration/nodejs/integration-steps/
-Use this fake card 4100 2800 0000 1007
