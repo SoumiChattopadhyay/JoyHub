@@ -1,0 +1,44 @@
+<%-layout("layouts/boilerplate.ejs")%>
+<h1 class="offset-3 mt-4 mb-4">Create New Listing</h1>
+<div class="container offset-1">
+    <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-8 offset-2 mb-2">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" id="title" placeholder="Enter title" class="form-control" name="list[title]" required>
+                <div class="valid-feedback">Title looks good</div>
+                <div class="invalid-feedback">Please enter a title</div>
+            </div>
+            <div class="col-8 offset-2 mb-2">
+                <label for="desc" class="form-label">Description:</label>
+                <textarea id="desc" placeholder="Enter short description" class="form-control" name="list[description]" required></textarea>
+                <div class="invalid-feedback">Please enter a short description</div>
+            </div>
+            <div class="col-8 offset-2 mb-2">
+                <label for="img" class="form-label">Upload Listing Image</label>
+                <input type="file" id="img" class="form-control" name="list[image]" required>
+            </div>
+            <div class="col-3 offset-2 mb-2">
+                <label for="capacity" class="form-label">Max attendees:</label>
+                <input type="text" id="capacity" placeholder="Enter capacity" class="form-control" name="list[capacity]" required>
+            </div>
+            <div class="col-5 mb-2">
+                <label for="location" class="form-label">Location:</label>
+                <input type="text" id="location" placeholder="Enter location"class="form-control" name="list[location]" required>
+            </div>
+            <div class="col-8 offset-2 mb-2">
+                <label for="country" class="form-label">Country:</label>
+                <input type="text" id="country" placeholder="Enter country"class="form-control" name="list[country]" required>
+            </div>
+            <div class="col-4 offset-2 mb-2">
+                <label for="price" class="form-label">Price:</label>
+                <input type="number" id="price" placeholder="Enter price"class="form-control" name="list[price]">
+            </div>
+            <div class="col-4 mb-2">
+                <label for="category" class="form-label">Category:</label>
+                <input type="text" id="category" placeholder="Enter category"class="form-control" name="list[category]">
+            </div>
+        </div>
+        <button class="btn blue white offset-2 mt-3 mb-5">Add Listing</button>
+    </form>
+</div>

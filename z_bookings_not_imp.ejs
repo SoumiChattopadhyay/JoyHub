@@ -1,0 +1,37 @@
+<%-layout("/layouts/boilerplate.ejs")%>
+<%-include("../includes/sidebar.ejs")%>
+<div class="main">
+    <%if(allBookings && allBookings.length > 0){%>
+    <h2>Your Bookings:</h2>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1"><!--class row makes this div a horizontal container for everything inside it and when we mention row-cols-3 it means that in one row there will be three columns-->
+    <% for(let booking of allBookings){%>
+        <a href="/listings/<%=booking.listing._id%>" class="list-link">
+            <div class="card mt-3 mb-3 bg-transparent ">
+                <img src="<%=booking.listing.image.url%>" class="card-img-top ms-0" alt="img">
+                <div class="card-img-overlay" style="width:320px;height:240px;"></div><!-- The card-img-overlay is an empty <div>. It is intended to act as a visual layer above the image. The CSS rule changes the overlay's opacity to 0.2, making it semi-transparent.The background-color: white; adds a white overlay over the image.If no background-color is set, the overlay's content will only dim due to the opacity. The card-img-overlay class in Bootstrap is styled to cover the entire card area, aligning it with the dimensions of its parent card. -->
+                <div class="card-body">
+                    <p class="card-text"><b><%=booking.listing.title%></b><br>
+                    <span><b>Price:</b> &#8377;<%=booking.listing.price.toLocaleString("en-IN")%> / day</span>&nbsp;&nbsp;&nbsp;</p>
+                </div> 
+            </div>
+            <p class="ms-1" onclick="event.preventDefault();event.stopPropagation();" style="cursor:text">
+                <b>Event:</b> <%= booking.eventName %> <br>
+                <b>Date:</b> <%= booking.date.toDateString() %> <br>
+                <b>Guests:</b> <%= booking.guests %><br>
+                <b>Status:</b> <%= booking.status %><br>
+                <b>Payment Status:</b> <%= booking.payment_status%>
+                <%if(booking.status=="confirmed"){%>
+                <form action="/bookings/<%= booking._id %>/payment" method="POST">
+                    <button class="btn btn-success btn-sm" >Make Payment</button>
+                </form>
+                <%}else{%>
+                    <h5 onclick="event.preventDefault();event.stopPropagation();" style="cursor:text;color:rgb(177, 2, 2);">Your booking was rejected:&#40;</h5>
+                <%}%>
+            </p>
+        </a>
+    <%}%>
+    </div>
+    <%}else{%>
+        <h2 style="margin-left:50px;margin-top:30px;">You don't have any bookings.</h2>
+    <%}%>
+</div>

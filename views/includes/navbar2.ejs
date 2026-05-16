@@ -1,0 +1,134 @@
+ <style>
+    .filters{
+        display:flex;
+    }
+    .filter{
+      margin-right:2.5rem;
+      margin-top:2rem;
+      opacity:0.7;
+    }
+    .filter .icons{
+      text-align:center;
+    }
+    .filter .icon-text{
+      font-size: 13px;
+    }
+    .filter:hover{
+      opacity:1;
+      cursor:pointer;
+    }
+    .toggle-switch{
+      margin-top:1.5rem;
+      border:1px solid rgb(9, 70, 108);
+      border-radius: 13px;
+      height:55px;
+      width:150px;
+      padding-right:5px;
+      padding-top:7px;
+    }
+    .tax-info{
+      display:none;
+    }
+    .icon-text{
+        margin-bottom: 0;
+    }
+</style>
+
+<div class="filters ms-3">
+    <div class="filter ms-2" onclick="window.location.href='/category/Birthdays'">
+      <div class="icons">
+        <i class="fa-solid fa-cake-candles"></i>
+      </div>
+      <p class="icon-text">Birthdays</p>
+    </div>
+
+    <div class="filter"onclick="window.location.href='/category/Weddings'">
+      <div class="icons">
+        <i class="fa-brands fa-gratipay"></i>
+      </div>
+      <p class="icon-text">Weddings</p>
+    </div>
+
+    <div class="filter" onclick="window.location.href='/category/Meetings'">
+      <div class="icons">
+        <i class="fa-regular fa-calendar"></i>
+      </div>
+      <p class="icon-text">Meetings</p>
+    </div>
+
+    <div class="filter" onclick="window.location.href='/category/Gatherings'">
+      <div class="icons">
+        <i class="fa-solid fa-house"></i>
+      </div>
+      <p class="icon-text">Gatherings</p>
+    </div>
+
+    <div class="filter" onclick="window.location.href='/category/Gardens'">
+      <div class="icons">
+        <i class="fa-brands fa-pagelines"></i>
+      </div>
+      <p class="icon-text">Gardens</p>
+    </div>
+
+    <div class="filter" onclick="window.location.href='/category/Studios'">
+      <div class="icons">
+        <i class="fa-solid fa-microphone-lines"></i>
+      </div>
+      <p class="icon-text">Studios</p>
+    </div>
+    
+    <div class="filter" onclick="window.location.href='/category/Conferences'">
+      <div class="icons">
+        <i class="fa-solid fa-person-chalkboard"></i>
+      </div>
+      <p class="icon-text">
+        Conferences
+      </p>
+    </div>
+
+    <div class="filter" onclick="window.location.href='/category/Galleries'">
+      <div class="icons">
+        <i class="fa-solid fa-palette"></i>
+      </div>
+      <p class="icon-text">
+        Galleries
+      </p>
+    </div>
+
+    <div class="filter" onclick="window.location.href='/category/Beaches'">
+      <div class="icons">
+        <i class="fa-solid fa-umbrella-beach"></i>
+      </div>
+      <p class="icon-text">Beaches</p>
+    </div>
+
+    <div class="filter" onclick="window.location.href='/category/Rooftops'">
+      <div class="icons">
+        <i class="fa-solid fa-people-roof"></i>
+      </div>
+      <p class="icon-text">Rooftops</p>
+    </div>
+
+    <div class="toggle-switch">
+      <div class="form-check form-switch form-check-reverse">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 14px; text-align:left; padding-left:5px;">Display prices after taxes</label>
+      </div>
+    </div>
+
+  </div>
+  <hr class="ms-3">
+  
+  <script>
+  let taxswitch = document.getElementById("flexSwitchCheckDefault");
+    taxswitch.addEventListener("click",()=>{
+      let taxinfos=document.querySelectorAll(".tax-info");
+      for(let taxinfo of taxinfos){
+        if(taxinfo.style.display!="inline"){
+          taxinfo.style.display="inline";
+        }else{
+        taxinfo.style.display="none";
+        }
+      }
+    });
+</script>

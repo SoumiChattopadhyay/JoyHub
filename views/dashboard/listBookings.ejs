@@ -1,0 +1,38 @@
+<%-layout("/layouts/boilerplate.ejs")%>
+<%-include("../includes/sidebar.ejs")%>
+<style>
+    .listings-container {
+    display: flex;
+    overflow-x: auto;  
+    gap: 20px;
+    padding: 10px;
+
+    scroll-behavior: smooth;
+}
+</style>
+<div class="main">
+    <% if (allBookings && allBookings.length > 0) { %>
+        <h2>All Bookings</h2>
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 listings-container"><!--class row makes this div a horizontal container for everything inside it and when we mention row-cols-3 it means that in one row there will be three columns-->
+            <% allBookings.forEach(booking => { %>
+                <div class="card mt-3 mb-3 bg-transparent ">
+                    <img src="<%= booking.listing.image.url %>" class="card-img-top ms-0" alt="Listing Image">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= booking.listing.title %></h5>
+                        <p class="card-text">
+                            <b>Name:</b> @<%= booking.user.username %> <br>
+                            <b>Event:</b> <%= booking.eventName %> <br>
+                            <b>Start Date:</b> <%= booking.startDate.toDateString() %><br> 
+                            <b>End Date:</b> <%= booking.endDate.toDateString() %><br>
+                            <b>Start Time:</b> <%= booking.startTime %> &nbsp;&nbsp; <b>End Time:</b> <%= booking.endTime %><br>
+                            <b>Guests:</b> <%= booking.guests %> <br>
+                        </p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <h3 class="margin-left:50px;margin-top:30px;">No bookings.</h3>
+    <% } %>
+</div>
+<br><hr>

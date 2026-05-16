@@ -1,0 +1,62 @@
+<%-layout("/layouts/boilerplate.ejs")%>
+<%-include("../includes/sidebar.ejs")%>
+<div class="main">
+    <% if (allBookings && allBookings.length > 0) { %>
+        <h2 >Pending Bookings</h2>
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1"><!--class row makes this div a horizontal container for everything inside it and when we mention row-cols-3 it means that in one row there will be three columns-->
+            <% allBookings.forEach(booking => { %>
+                <div class="card mt-3 mb-3 bg-transparent ">
+                    <img src="<%= booking.listing.image.url %>" class="card-img-top ms-0" alt="Listing Image">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= booking.listing.title %></h5>
+                        <p class="card-text">
+                            <b>User:</b> <%= booking.user.username %> <br>
+                            <b>Event:</b> <%= booking.eventName %> <br>
+                            <b>Date:</b> <%= booking.date.toDateString() %> <br>
+                            <b>Guests:</b> <%= booking.guests %> <br>
+                            <b>Status:</b> <%= booking.status %>
+                        </p>
+                    </div>
+                    <div class="card-footer d-flex bg-transparent ps-0">
+                        <form action="/bookings/<%= booking._id %>/confirm" method="POST">
+                            <button class="btn btn-success btn-sm">Confirm</button>
+                        </form>&nbsp;&nbsp;
+                        <form action="/bookings/<%= booking._id %>/decline" method="POST">
+                            <button class="btn btn-danger btn-sm">Decline</button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <h3 class="margin-left:50px;margin-top:30px;">No pending bookings at the moment.</h3>
+    <% } %>
+</div>
+<br><hr>
+<div class="main">
+    <% if (pastBookings && pastBookings.length > 0) { %>
+        <h2 >Past Bookings</h2>
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1"><!--class row makes this div a horizontal container for everything inside it and when we mention row-cols-3 it means that in one row there will be three columns-->
+            <% pastBookings.forEach(booking => { %>
+                <div class="card mt-3 mb-3 bg-transparent ">
+                    <img src="<%= booking.listing.image.url %>" class="card-img-top ms-0" alt="Listing Image">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= booking.listing.title %></h5>
+                        <p class="card-text">
+                            <b>User:</b> <%= booking.user.username %> <br>
+                            <b>Event:</b> <%= booking.eventName %> <br>
+                            <b>Date:</b> <%= booking.date.toDateString() %> <br>
+                            <b>Guests:</b> <%= booking.guests %> <br>
+                            <b>Status:</b> <%= booking.status %><br>
+                            <%if(booking.status=="confirmed"){%>
+                                <b>Payment Status:</b> <%= booking.payment_status %>
+                            <%}%>
+                        </p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <h3 class="margin-left:50px;margin-top:30px;">No past bookings for this listing.</h3>
+    <% } %>
+</div>

@@ -1,0 +1,48 @@
+<%-layout("layouts/boilerplate.ejs")%>
+<h1 class="offset-2 mt-4 mb-4">Edit Listing</h1>
+<div class="container">
+    <form method="POST" action="/listings/<%=listing._id%>?_method=PUT" enctype="multipart/form-data" novalidate class="needs-validation mb-6">
+        <div class="row">
+            <div class="col-8 offset-2 mb-2">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" id="title" value="<%=listing.title%>" class="form-control" name="list[title]" required>
+                <div class="valid-feedback">Title looks good</div>
+                <div class="invalid-feedback">Please enter a title</div>
+            </div>
+            <div class="col-8 offset-2 mb-2">
+                <label for="desc" class="form-label">Description:</label>
+                <textarea id="desc" class="form-control" name="list[description]" required><%=listing.description%></textarea>
+                <div class="invalid-feedback">Please enter a short description</div>
+            </div>
+            <div class="col-8 offset-2 mb-4">
+                <p>Original Listing</p>
+                <img src="<%=originalImageUrl%>">
+            </div>
+            <div class="col-8 offset-2 mb-2">
+                <label for="img" class="form-label">Upload New Image</label>
+                <input type="file" id="img" value="<%=listing.image.url%>" class="form-control" name="list[image]" >
+            </div>
+            <div class="col-3 offset-2 mb-2">
+                <label for="capacity" class="form-label">Max attendees:</label>
+                <input type="number" id="capacity" value="<%=listing.capacity%>" placeholder="Enter capacity" class="form-control" name="list[capacity]" required>
+            </div>
+            <div class="col-5 mb-2">
+                <label for="location" class="form-label">Location:</label>
+                <input type="text" id="location" value="<%=listing.location%>" placeholder="Enter location"class="form-control" name="list[location]" required>
+            </div>
+            <div class="col-8 offset-2 mb-2">
+                <label for="country" class="form-label">Country:</label>
+                <input type="text" id="country" value="<%=listing.country%>" placeholder="Enter country"class="form-control" name="list[country]" required>
+            </div>
+            <div class="col-4 offset-2 mb-2">
+                <label for="price" class="form-label">Price:</label>
+                <input type="number" id="price" value="<%=listing.price%>" placeholder="Enter price"class="form-control" name="list[price]">
+            </div>
+            <div class="col-4 mb-2">
+                <label for="category" class="form-label">Category:</label>
+                <input type="text" id="category" value="<%=listing.category%>" placeholder="Enter category"class="form-control" name="list[category]">
+            </div>
+        </div>
+        <button class="btn blue white offset-2 mt-3 mb-5">Edit Listing</button>
+    </form>
+</div>

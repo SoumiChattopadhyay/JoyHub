@@ -1,0 +1,126 @@
+/* html,body{ */
+    /* overflow-x: hidden;stops horizontal scrollbar */
+/* } */
+*{
+    color:rgb(0, 88, 135);
+}
+body{
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background-color: rgb(205, 245, 255);
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    overflow-x: hidden;
+}
+.container{
+    min-height: 100vh;
+}
+.fa-face-smile{
+    font-size:2rem;
+    color:rgb(0, 195, 255);
+}
+.card-text{
+    text-decoration: none;
+}
+.list-link{
+    text-decoration: none;
+    margin-left:20px;
+    margin-right:28px;
+    width:20rem;
+    /* height:15rem; */
+    padding:0;
+}
+.card{
+    border:none;
+}
+.card-img-top{
+    border-radius: 1rem;
+    object-fit:cover;
+    height:15rem;
+    width:20rem;
+    /* width:100%; */
+    border:3px solid rgb(0, 195, 255);
+}
+.card-body{
+   padding:5px;
+}
+.card-img-overlay{
+    height:240px;
+    width:320px;
+    padding:0;
+}
+.card-img-overlay:hover{
+    height:240px;
+    width:320px;
+    padding:0;
+    opacity:0.2;
+    background-color: rgb(205, 245, 255);
+}
+/* Footer */
+.f-info{
+    background-color: rgb(209, 211, 213);
+    text-align: center;
+    font-size:1rem;
+}
+.f-info-links a{
+    text-decoration: none;
+    color:rgb(6, 90, 135);
+}
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+.f-info-socials i:hover{
+    opacity:0.7;
+    cursor:pointer;
+}
+svg{
+    width:20px;
+    height:20px;
+}
+#map{
+    height:400px;
+    width:60vw;
+    border-radius: 22px;
+}
+#searchBtn{
+    border-radius: 25px;
+    display:flex;
+}
+#searchInp{
+    border-radius: 25px;
+}
+.fa-magnifying-glass{
+    color:white;
+    /* display:inline; */
+    /* padding-right:3px; */
+}
+.filters{
+    position:sticky;
+    top:87px;
+    z-index: 2;
+    background-color: rgb(205, 245, 255);
+}
+.userImg img{
+    width:35px;
+    height:35px;
+    border-radius: 50%;
+}
+/* Hides Bootstrap dropdown arrow */
+.dropdown-toggle::after {
+  display: none !important;
+}
+.dropdown-menu {
+  right: 0 !important;    
+  left: auto !important;
+  z-index: 1050; /* keep it above other elements */
+  font-size:15px;
+}
+
+/* Style page content */
+.main {
+    margin-left: 230px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+    width:100%;
+    height:100%;
+    margin-top:30px;
+}

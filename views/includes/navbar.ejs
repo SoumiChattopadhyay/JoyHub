@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
+  <div class="container-fluid flex ms-3">
+
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-solid fa-face-smile"> J o y h u b</i>
+      <blockquote class="blockquote mt-4 mb-0 ms-5">
+        <footer class="blockquote-footer"><cite title="message">"The Hub of Your Happiness."</cite></footer>
+      </blockquote>
+    </a>
+
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <form class="d-flex" role="search" action="/search" method="GET">
+          <input class="form-control me-2" id="searchInp" name="q" value="<%=typeof q !== 'undefined'?q:''%>"
+            type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline blue white" id="searchBtn" type="submit"><i
+              class="fa-solid fa-magnifying-glass mt-1 me-1"></i>Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse ms-5" id="navbarNavAltMarkup">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link ms-1 mt-2" href="/listings/new">Add New Listing</a>
+        <%if(!currUser){%>
+          <a class="nav-link pb-0 mt-2" href="/signup">Sign up</a>
+          <a class="nav-link pb-0 mt-2 me-2" href="/login">Log in</a>
+          <%}else{%>
+            <div class="userImg ms-2 me-2 mt-2 dropdown show">
+              <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <img src="/images/blank-profile-picture-973460_960_720.webp" alt="image preview" id="profile-pic">
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item pb-2" href="/dashboard/account">Your Account</a></li>
+                <li><a class="dropdown-item pb-2" href="/dashboard/listings">Your Listings</a></li>
+                <li><a class="dropdown-item pb-2" href="/dashboard/bookings">Your Bookings</a></li>
+                <li><a class="dropdown-item pb-2" href="/dashboard/chats">Chats</a></li>
+                <li><a class="dropdown-item pb-2" href="/dashboard/wishlist">Wishlist</a></li>
+                <li><a class="dropdown-item pb-2" href="/logout">Log Out</a></li>
+              </ul>
+            </div>
+            <!-- <a class="nav-link ms-1 mt-0"  href="/logout">Log out</a> -->
+            <%}%>
+      </div>
+    </div>
+
+  </div>
+</nav>

@@ -1,0 +1,58 @@
+    <style>
+        .sidenav{
+            margin:0;
+            padding:0;
+            width:230px;
+            height:100%;
+            position:fixed;/* Fixed Sidebar (stay in place on scroll) */
+            z-index: 1; /* Stay on top */
+            top: 0; /* Stay at the top */
+            left: 0;
+            background-color: aliceblue;
+            padding-top: 120px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            display: block;
+            color:rgb(0, 88, 135);
+            padding-left: 40px;
+
+        }
+        .sidenav a:hover {
+            color: rgb(1, 39, 59);
+        }
+        /* On smaller screens, where width is less than 450px, change the style of the sidebar (less width and a smaller font size) */
+        @media screen and (max-width:450px){
+            .sidenav {width: 160px;}
+            .sidenav a {font-size: 18px;}
+        }
+        img{
+            width:144px;
+            height:134px;
+            border-radius: 50%;
+            margin-left: 30px;
+            margin-bottom: 20px;
+            /* dont set padding for image otherwise image wont be perfect circle */
+        }
+        *{
+            color:rgb(0, 88, 135);
+        }
+        body{
+            font-family: "Plus Jakarta Sans", sans-serif;
+            background-color: rgb(179, 240, 255);
+        }
+    </style>
+    <div class="sidenav">
+        <img src="/images/blank-profile-picture-973460_960_720.webp" alt="image preview" id="profile-pic">
+        <h5 class="ps-3 offset-3"><i><b><%= currUser ? currUser.username : 'Guest' %></b></i> </h5>
+        <a href="/dashboard/account">Your Account</a>
+        <a href="/dashboard/listings">Your Listings</a>
+        <a href="/dashboard/bookings">Your Bookings</a>
+        <a href="/dashboard/chats">Your Chats</a>
+        <a href="/dashboard/wishlist">Your Wishlist</a>
+        <a href="/logout">Logout</a>
+    </div>

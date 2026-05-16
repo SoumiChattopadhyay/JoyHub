@@ -1,0 +1,171 @@
+<%-layout("layouts/boilerplate.ejs")%>
+    <style>
+        #date::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+        }
+
+        #start::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+        }
+
+        #end::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+        }
+    </style>
+    <h1 class="offset-3 mt-4 mb-4">Book This Space</h1>
+    <div class="container offset-1">
+        <form method="POST" action="/listings/<%=list_id%>/booking" novalidate class="needs-validation">
+            <div class="row">
+                <!-- User Details -->
+                <!-- <div class="col-8 offset-2 mb-3">
+                <label for="name" class="form-label">Your Name:</label>
+                <input type="text" id="name" placeholder="Enter your name" class="form-control" name="booking[name]" required>
+                <div class="invalid-feedback">Please enter your name</div>
+            </div>
+            <div class="col-8 offset-2 mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email" class="form-control" name="booking[email]" required>
+                <div class="invalid-feedback">Please enter a valid email</div>
+            </div> -->
+                <div class="col-8 offset-2 mb-3">
+                    <label for="phone" class="form-label">Phone:</label>
+                    <input type="tel" pattern="[0-9]{10}" id="phone" placeholder="Enter your phone number"
+                        class="form-control" name="booking[phone]" required>
+                    <div class="invalid-feedback">Please enter a phone number</div>
+                </div>
+
+                <!-- Event Details -->
+                <div class="col-8 offset-2 mb-3">
+                    <label for="eventName" class="form-label">Event Name/Type:</label>
+                    <input type="text" id="eventName" placeholder="e.g. Wedding, Conference" class="form-control"
+                        name="booking[eventName]" required>
+                    <div class="invalid-feedback">Please specify the event type</div>
+                </div>
+                <div class="col-4 offset-2 mb-3">
+                    <label for="startDate" class="form-label">Start Date:</label>
+                    <input type="date" min="<%= new Date().toISOString().split(" T")[0]%>" id="startDate"
+                    class="form-control" name="booking[startDate]" required>
+                    <div class="invalid-feedback">Please select a date</div>
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="endDate" class="form-label">End Date:</label>
+                    <input type="date" min="<%= new Date().toISOString().split(" T")[0]%>" id="endDate"
+                    class="form-control" name="booking[endDate]" required>
+                    <div class="invalid-feedback">Please select a date</div>
+                </div>
+                <div class="col-4 offset-2 mb-3">
+                    <label for="startTime" class="form-label">Start Time:</label>
+                    <input type="time" id="startTime" class="form-control" name="booking[startTime]" required>
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="endTime" class="form-label">End Time:</label>
+                    <input type="time" id="endTime" class="form-control" name="booking[endTime]" required>
+                    <div class="invalid-feedback">End time must be after start time</div>
+                </div>
+                <div class="col-4 offset-2 mb-3">
+                    <label for="guests" class="form-label">Number of Guests:</label>
+                    <input type="number" id="guests" placeholder="Enter guest count" class="form-control"
+                        name="booking[guests]" required>
+                    <div class="invalid-feedback">Please enter guest count</div>
+                </div>
+
+                <!-- Special Requests -->
+                <div class="col-8 offset-2 mb-3">
+                    <label for="requests" class="form-label">Special Requests:</label>
+                    <textarea id="requests" placeholder="Any additional needs (catering, AV, parking...)"
+                        class="form-control" name="booking[requests]"></textarea>
+                </div>
+
+                <!-- Agreement -->
+                <div class="col-8 offset-2 mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="terms" name="booking[terms]" required>
+                    <label class="form-check-label" for="terms">I agree to the terms & cancellation policy</label>
+                    <div class="invalid-feedback">You must agree before submitting</div>
+                </div>
+            </div>
+
+            <button onclick="checkouthandler()" type="button" class="btn blue white offset-2 mt-3 mb-5">Confirm
+                Booking</button>
+        </form>
+    </div>
+    <script>
+        const list_id = '<%= list_id %>';
+        const form = document.querySelector("form");
+        const startDate = document.getElementById("startDate");
+        const endDate = document.getElementById("endDate");
+        const startTime = document.getElementById("startTime");
+        const endTime = document.getElementById("endTime");
+        function validateDateTime() {
+            if (!startDate.value || !endDate.value || !startTime.value || !endTime.value) return;//If any field is empty stop validation
+
+            const start = new Date(`${startDate.value}T${startTime.value}`);
+            const end = new Date(`${endDate.value}T${endTime.value}`);
+            if (end <= start) {
+                endTime.setCustomValidity("End time must be after Start time")
+            } else {
+                endTime.setCustomValidity("");
+            }
+        }
+        [startDate, endDate, startTime, endTime].forEach(input => {
+            input.addEventListener("change", validateDateTime);
+        });
+
+        const checkouthandler = async () => {
+            const form = document.querySelector("form");
+            const formData = {
+                booking: {
+                    phone: document.querySelector("#phone").value,
+                    eventName: document.querySelector("#eventName").value,
+                    startDate: document.querySelector("#startDate").value,
+                    endDate: document.querySelector("#endDate").value,
+                    startTime: document.querySelector("#startTime").value,
+                    endTime: document.querySelector("#endTime").value,
+                    guests: document.querySelector("#guests").value,
+                    requests: document.querySelector("#requests").value,
+                    terms: document.querySelector("#terms").checked
+                }
+            };
+
+            const response = await fetch(window.location.pathname, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+
+            // Open Razorpay Checkout
+            const options = {
+                key: data.keyId, // Replace with your Razorpay key_id
+                amount: data.amount, // Amount is in currency subunits.
+                currency: 'INR',
+                name: 'Acme Corp',
+                description: 'Test Transaction',
+                order_id: data.orderId, // This is the order_id created in the backend
+                handler: async function (response) {
+                    await fetch(`/listings/${list_id}/booking/verifyPayment`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(response)
+                    });
+
+                    window.location.href = `/listings/${list_id}/booking/payment`;
+                },
+                prefill: {
+                    name: "<%= currUser.username %>",
+                    email: "<%= currUser.email %>",
+                    contact: document.getElementById("phone").value
+                },
+                theme: {
+                    color: '#F37254'
+                },
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+        }
+    </script>
