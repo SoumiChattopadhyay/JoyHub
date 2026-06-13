@@ -1,2 +1,153 @@
 <%-layout("/layouts/boilerplate.ejs")%>
-<%-include("../includes/sidebar.ejs")%>
+    <%-include("../includes/sidebar.ejs")%>
+        <%-layout("/layouts/boilerplate.ejs")%>
+            <%-include("../includes/sidebar.ejs")%>
+                <style>
+                    .profile-section {
+                        text-align: center;
+                        margin-bottom: 30px;
+                    }
+
+                    .profile-img {
+                        width: 140px;
+                        height: 140px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    .profile-section h3 {
+                        margin-top: 15px;
+                        color: #005b96;
+                    }
+
+                    .menu {
+                        list-style: none;
+                        padding: 0;
+                    }
+
+                    .menu li {
+                        margin: 20px 0;
+                    }
+
+                    .menu a {
+                        text-decoration: none;
+                        font-size: 1.2rem;
+                        color: #005b96;
+                    }
+
+                    .menu a.active {
+                        font-weight: bold;
+                    }
+
+
+                    .account-card {
+                        background: white;
+                        border-radius: 16px;
+                        padding: 35px;
+                        max-width: 800px;
+                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+                    }
+
+                    .account-card h2 {
+                        margin-bottom: 30px;
+                        color: #0099e5;
+                    }
+
+                    .info-row {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 16px 0;
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .label {
+                        font-weight: 600;
+                    }
+
+                    .btn-section {
+                        margin-top: 30px;
+                    }
+
+                    .edit-btn {
+                        background: #00a6f4;
+                        color: white;
+                        padding: 12px 24px;
+                        border-radius: 10px;
+                        text-decoration: none;
+                    }
+
+                    .account-content {
+                        margin-top: 70px;
+                    }
+                </style>
+                <div class="main">
+                    <div class="account-content">
+
+                        <div class="account-card">
+                            <h2>Account Information</h2>
+
+                            <div class="info-row">
+                                <strong><span>Username</span></strong>
+                                <span>
+                                    <%= currUser.username %>
+                                </span>
+                            </div>
+
+                            <div class="info-row">
+                                <strong><span>Email</span></strong>
+                                <span>
+                                    <%= currUser.email %>
+                                </span>
+                            </div>
+
+                            <!-- <div class="info-row">
+                                <span>Member Since</span>
+                                <span>
+                                    <%= new Date(currUser.createdAt).toLocaleDateString() %>
+                                </span>
+                            </div> -->
+                            <div class="info-row">
+                                <% if(allLists && allLists.length> 0){ %>
+
+                                    <p><strong>Owner of:</strong></p>
+
+                                    <ul>
+                                        <% allLists.forEach(list=> { %>
+                                            <li>
+                                                <a href="/listings/<%= list._id %>">
+                                                    <%= list.title %>
+                                                </a>
+                                            </li>
+                                            <% }) %>
+                                    </ul>
+
+                                    <% } else { %>
+
+                                        <p>You don't own any listings yet.</p>
+
+                                        <% } %>
+                            </div>
+                            <div class="info-row">
+                                <% if(allBookings && allBookings.length> 0){ %>
+                                    <p><strong>Past Bookings:</strong></p>
+                                    <ul>
+                                        <% allBookings.forEach(booking=> { %>
+                                            <li>
+                                                <%= booking.listing.title %>
+                                                    <% if(booking.eventName){ %>
+                                                        (<%= booking.eventName %>)
+                                                            <% } %>
+                                            </li>
+                                            <% }) %>
+                                    </ul>
+
+                                    <% } else { %>
+
+                                        <p>No previous bookings.</p>
+
+                                        <% } %>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>

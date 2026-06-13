@@ -43,13 +43,13 @@
                 </div>
                 <div class="col-4 offset-2 mb-3">
                     <label for="startDate" class="form-label">Start Date:</label>
-                    <input type="date" min="<%= new Date().toISOString().split(" T")[0]%>" id="startDate"
+                    <input type="date" min="<%= new Date().toISOString().split("T")[0]%>" id="startDate"
                     class="form-control" name="booking[startDate]" required>
                     <div class="invalid-feedback">Please select a date</div>
                 </div>
                 <div class="col-4 mb-3">
                     <label for="endDate" class="form-label">End Date:</label>
-                    <input type="date" min="<%= new Date().toISOString().split(" T")[0]%>" id="endDate"
+                    <input type="date" min="<%= new Date().toISOString().split("T")[0]%>" id="endDate"
                     class="form-control" name="booking[endDate]" required>
                     <div class="invalid-feedback">Please select a date</div>
                 </div>
@@ -84,8 +84,7 @@
                 </div>
             </div>
 
-            <button onclick="checkouthandler()" type="button" class="btn blue white offset-2 mt-3 mb-5">Confirm
-                Booking</button>
+            <button onclick="checkouthandler()" type="button" class="btn blue white offset-2 mt-3 mb-5">Confirm Booking</button>
         </form>
     </div>
     <script>

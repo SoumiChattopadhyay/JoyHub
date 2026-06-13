@@ -3,7 +3,18 @@ const Booking = require("../models/booking");
 
 module.exports.getAccount = async (req,res)=>{
     const currUser=res.locals.currUser;
-    res.render("dashboard/account.ejs",{currUser});
+    const allLists = await Listing.find({owner:currUser});
+    if(!allLists){
+        return res.render("dashboard/listings.ejs");
+    }
+    const allBookings = await Booking.find({user:currUser}).populate({
+        path:"listing",
+        populate: {path: "owner", select: "username"}
+    }).populate("user");//pulls in the full listing doc
+    if(!allBookings){
+        return res.render("dashboard/myBookings.ejs");
+    }
+    res.render("dashboard/account.ejs",{currUser,allLists,allBookings});
 };
 
 module.exports.getListings = async(req,res)=>{

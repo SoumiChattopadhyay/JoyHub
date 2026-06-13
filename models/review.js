@@ -1,4 +1,3 @@
-//build a collection for reviews where i will save reviews as docs
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const reviewSchema = new Schema({
@@ -12,7 +11,7 @@ const reviewSchema = new Schema({
     },
     createdAt:{
         type:Date,
-        default:Date.now()
+        default:Date.now//with Date.now() it is executed immediately when the schema loads, but with Date.now mongoose calls the function when the document is created.
     },
     author:{
         type:Schema.Types.ObjectId,
