@@ -50,9 +50,9 @@ module.exports.listBookings = async(req,res)=>{
         .populate("user");
     // Filter out bookings where listing.owner doesn't match (populate sets to null)
     const filteredBookings = allBookings.filter(booking => booking.listing !== null);
-    if(!filteredBookings || filteredBookings.length === 0){
-        return res.render("dashboard/listBookings.ejs");
-    }
+    // if(!filteredBookings || filteredBookings.length === 0){
+    //     return res.render("dashboard/listBookings.ejs");
+    // }
     res.render("dashboard/listBookings.ejs",{allBookings: filteredBookings});
 };
 

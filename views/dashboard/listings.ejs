@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <p class="card-text"><b><%=list.title%></b><br><b>Max Attendees:</b> <%=list.capacity%> people <br>
                     <span><b>Price:</b> &#8377;<%=list.price.toLocaleString("en-IN")%> / day</span>&nbsp;&nbsp;&nbsp;<i class="tax-info"><b>+15% GST</b></i></p>
-                    <button  onclick="event.preventDefault();event.stopPropagation();window.location.href='/dashboard/<%=list._id%>/bookings'" class="btn btn-danger">Check Bookings</button>
+                    <button onclick="event.preventDefault();event.stopPropagation();window.location.href='/dashboard/<%=list._id%>/bookings'" class="btn btn-danger">Check Bookings</button>
                 </div> 
             </div>
         </a>
